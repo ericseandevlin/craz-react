@@ -24,7 +24,7 @@ class Single extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.params.slug != nextProps.params.slug) {
+    if (this.props.params && this.props.params.slug != nextProps.params.slug) {
       // load new post data (when reusing component)
       nextProps.dispatch(blogMaybeLoadPost(this.getSlug(nextProps), 'view'));
     }
@@ -37,7 +37,13 @@ class Single extends Component {
     if (typeof props === 'undefined') {
       props = this.props;
     }
-    return props.params.slug.replace(/\/\ /i, '');
+
+    let slug = props.params && props.params.slug || props.slug;
+    if (typeof slug !== 'number' && slug.contains('/')) {
+      return slug.replace(/\/\ /i, '');
+    }
+
+    return slug;
   }
 
   render() {
@@ -50,7 +56,7 @@ class Single extends Component {
     }
 
     return (
-      <div className="posts">
+      <div className="posts single-container">
         <Post post={post} tags={blog.tags} categories={blog.categories} authors={blog.authors} context="view" pageType="single"/>
       </div>
     );
