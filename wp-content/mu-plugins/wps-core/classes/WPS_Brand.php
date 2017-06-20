@@ -101,7 +101,7 @@ if ( ! class_exists( 'WPS_Brand' ) ) {
 		public function login_styles() {
 
 			// @todo Check login.css exists in theme, if so load it!
-			if ( is_string( $this->args['login_style'] ) ) {
+			if ( ! empty( $this->args ) && is_string( $this->args['login_style'] ) ) {
 				printf( '<style type="text/css">body.login div#login h1 a { %s }</style>', $this->args['login_style'] );
 			} else {
 				$defaults = array(
@@ -111,7 +111,7 @@ if ( ! class_exists( 'WPS_Brand' ) ) {
 					'padding-bottom'  => '30px',
 				);
 
-				$login_style = wp_parse_args( $args['login_style'], $defaults );
+				$login_style = ! empty( $args ) && $args['login_style'] ? wp_parse_args( $args['login_style'], $defaults ) : $defaults;
 
 				printf(
 					'<style type="text/css">body.login div#login h1 a { %s; }</style>',
