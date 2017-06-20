@@ -10,7 +10,7 @@ import Html from './../components/Html.jsx';
 class Post extends Component {
 
   componentWillMount() {
-    const {onMountHandler} = this.props;
+    const {onMountHandler, loadPostHandler} = this.props;
     if (typeof onMountHandler === 'function') {
       onMountHandler();
     }
@@ -196,7 +196,7 @@ class Post extends Component {
   getColorMeta() {
     const {post} = this.props;
 
-    if (post.color) {
+    if (post && post.color) {
       return post.color;
     }
 
@@ -222,6 +222,9 @@ class Post extends Component {
   getTemplate() {
     const {post} = this.props;
 
+    if (!post) {
+      return;
+    }
     switch (post.template) {
       case '_1-1':
         return (
@@ -248,8 +251,9 @@ class Post extends Component {
         );
         break;
       default:
+        const template = post.template || "";
         return (
-          <div className={post.template + " size-16-9"}>
+          <div className={template + " size-16-9"}>
             <div className={this.getClassName("post-content w-container")}>
               {this.getVideoSection()}
               {this.getPostTemplate()}
@@ -262,8 +266,7 @@ class Post extends Component {
 
   render() {
     const {pageType} = this.props;
-
-    if ("single" == pageType) {
+    if ("single" == pageType || "preview" == pageType || !pageType) {
       return (
         <main className="main-section">
           {this.getTemplate()}
