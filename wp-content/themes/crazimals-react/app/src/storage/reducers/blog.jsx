@@ -17,14 +17,14 @@ export default function blogReducer(state = null, action = {type: 'NONE'}) {
     case BLOG_SET_POST:
       return merge(state, {
         posts: {
-          [action.post.slug]: action.post
+          [(action.post.slug || action.post.id)]: action.post
         }
       });
 
     case BLOG_SET_PAGE:
       return merge(state, {
         pages: {
-          [action.page.slug]: action.page
+          [(action.post.slug || action.post.id)]: action.page
         }
       });
 
