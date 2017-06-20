@@ -5,7 +5,7 @@ out
 gen
 
 # Repo-specific
-test.php
+/test.php
 search-replace
 wp-content/db.php
 
