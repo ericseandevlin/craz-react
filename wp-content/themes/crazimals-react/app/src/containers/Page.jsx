@@ -57,7 +57,7 @@ class Page extends Component {
     }
 
     return (
-      <div className="page">
+      <div className="page-container">
         <Post post={page} tags={{}} categories={{}} authors={blog.authors} context="view" pageType="page"/>
       </div>
     );

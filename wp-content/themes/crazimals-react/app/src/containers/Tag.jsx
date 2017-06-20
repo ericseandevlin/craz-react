@@ -72,18 +72,20 @@ class Tag extends Component {
     const key = this.getKey();
     const feed = blog.feeds[key] ? blog.feeds[key] : {};
     return (
-      <Feed
-        key={key}
-        pageType="tag"
-        title={'Tag: ' + this.getCurrentTag().name}
-        feed={feed}
-        posts={blog.posts}
-        tags={blog.tags}
-        categories={blog.categories}
-        authors={blog.authors}
-        loadPostHandler={(slug) => this.loadPost(slug)}
-        loadFeedPageHandler={(page) => this.loadFeedPage(page)}
-      />
+      <div className="tag-container">
+        <Feed
+          key={key}
+          pageType="tag"
+          title={'Tag: ' + this.getCurrentTag().name}
+          feed={feed}
+          posts={blog.posts}
+          tags={blog.tags}
+          categories={blog.categories}
+          authors={blog.authors}
+          loadPostHandler={(slug) => this.loadPost(slug)}
+          loadFeedPageHandler={(page) => this.loadFeedPage(page)}
+        />
+      </div>
     );
   }
 }

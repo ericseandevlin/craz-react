@@ -72,18 +72,20 @@ class Category extends Component {
     const key = this.getKey();
     const feed = blog.feeds[key] ? blog.feeds[key] : {};
     return (
-      <Feed
-        key={key}
-        pageType="category"
-        title={'Category: ' + this.getCurrentCategory().name}
-        feed={feed}
-        posts={blog.posts}
-        tags={blog.tags}
-        categories={blog.categories}
-        authors={blog.authors}
-        loadPostHandler={(slug) => this.loadPost(slug)}
-        loadFeedPageHandler={(page) => this.loadFeedPage(page)}
-      />
+      <div className="category-container">
+        <Feed
+          key={key}
+          pageType="category"
+          title={'Category: ' + this.getCurrentCategory().name}
+          feed={feed}
+          posts={blog.posts}
+          tags={blog.tags}
+          categories={blog.categories}
+          authors={blog.authors}
+          loadPostHandler={(slug) => this.loadPost(slug)}
+          loadFeedPageHandler={(page) => this.loadFeedPage(page)}
+        />
+      </div>
     );
   }
 }

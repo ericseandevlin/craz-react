@@ -98,7 +98,7 @@ export default class Feed extends Component {
     };
 
     return (
-      <main className="main-section posts">
+      <main className={pageType + " main-section posts"}>
         <SectionsContainer className="container" {...options} activeSection={this.state.current}>
           {postsNodes}
         </SectionsContainer>

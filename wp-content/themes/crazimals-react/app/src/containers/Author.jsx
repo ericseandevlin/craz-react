@@ -73,18 +73,20 @@ class Author extends Component {
     const feed = blog.feeds[key] ? blog.feeds[key] : {};
     const name = this.getCurrentAuthor().name || '';
     return (
-      <Feed
-        key={key}
-        pageType="author"
-        title={'Author: ' + name}
-        feed={feed}
-        posts={blog.posts}
-        tags={blog.tags}
-        categories={blog.categories}
-        authors={blog.authors}
-        loadPostHandler={(slug) => this.loadPost(slug)}
-        loadFeedPageHandler={(page) => this.loadFeedPage(page)}
-      />
+      <div className="author-container">
+        <Feed
+          key={key}
+          pageType="author"
+          title={'Author: ' + name}
+          feed={feed}
+          posts={blog.posts}
+          tags={blog.tags}
+          categories={blog.categories}
+          authors={blog.authors}
+          loadPostHandler={(slug) => this.loadPost(slug)}
+          loadFeedPageHandler={(page) => this.loadFeedPage(page)}
+        />
+      </div>
     );
   }
 }
