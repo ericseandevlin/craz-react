@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 import Feed from './../components/Feed.jsx';
+import Preview from './Preview.jsx';
 
 
 import {
@@ -44,13 +45,13 @@ class Home extends Component {
     return 'date:desc';
   }
 
-  render() {
+  getHome() {
     const {blog} = this.props;
     const key = this.getKey();
     const feed = blog.feeds[key] ? blog.feeds[key] : {};
 
     return (
-      <div>
+      <div className="home-container">
         <Feed
           key={key}
           pageType="home"
@@ -65,6 +66,34 @@ class Home extends Component {
         />
       </div>
     );
+  }
+
+  parseQuery(qstr) {
+    let query = {};
+    let a = (qstr[0] === '?' ? qstr.substr(1) : qstr).split('&');
+    for (let i = 0; i < a.length; i++) {
+      let b = a[i].split('=');
+      query[decodeURIComponent(b[0])] = decodeURIComponent(b[1] || '');
+    }
+    return query;
+  }
+
+  getPreview(pageID) {
+    const {blog} = this.props;
+    return (
+      <div className="preview-container">
+        <Preview blog={blog} slug={pageID}/>
+      </div>
+    )
+  }
+
+  render() {
+    const {location} = this.props; // could be '?foo=bar'
+    let params = this.parseQuery(location.search);
+    if (location.search && params && params.p) {
+      return this.getPreview(+params.p)
+    }
+    return this.getHome()
   }
 }
 
